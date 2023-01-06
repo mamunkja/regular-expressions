@@ -54,8 +54,8 @@ function insertPlaceholder(param) {
 }
 
 function validateEmail(str) {
-    //allowed special character = '@' '.' '_' '-'
-    //after @ 1 or 2 '.' allowed
+    /* allowed special character = '@' '.' '_' '-'
+    after @ 1 or 2 '.' allowed */
     let re = /^([a-zA-Z0-9]\.?\_?\-?)+[^\.\_]@([a-zA-Z0-9])+\.+([a-zA-Z0-9])+\.?([a-zA-Z0-9]){2,}$/;
     let check = re.test(str);
     if(check){
