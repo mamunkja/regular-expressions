@@ -56,7 +56,7 @@ function insertPlaceholder(param) {
 function validateEmail(str) {
     //allowed special character = '@' '.' '_' '-'
     //after @ 1 or 2 '.' allowed
-    let re = /^([a-zA-Z0-9]\.?\_?\-?)+[^\.\_]@([a-zA-Z0-9])+\.+([a-zA-Z0-9]){2,}\.?([a-zA-Z0-9]){2,}$/;
+    let re = /^([a-zA-Z0-9]\.?\_?\-?)+[^\.\_]@([a-zA-Z0-9])+\.+([a-zA-Z0-9])+\.?([a-zA-Z0-9]){2,}$/;
     let check = re.test(str);
     if(check){
         validation.innerHTML = `<h5 class='success'>"${str}" matches with <br> RE: ${re.source}`;
