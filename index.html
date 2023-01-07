@@ -26,19 +26,20 @@
 <body>
     <div class="container">
         <h4>Validation</h4>
+        <h5>Please select one to validate !</h5>
         <form id="re_form" action="">
             <input type="radio" name="re_select" id="email" value="email">
             <label for="email">Email</label>
-            <input type="radio" name="re_select" id="phone" value="phone">
-            <label for="phone">Phone</label>
+            <input type="radio" name="re_select" id="cell" value="cell">
+            <label for="cell">Cell No.</label>
             <input type="radio" name="re_select" id="postcode" value="postcode">
             <label for="postcode">Post Code</label>
             <input type="radio" name="re_select" id="cname" value="name">
-            <label for="cname">Name</label>
+            <label id="lbl_name" for="cname">Name</label>
+            <hr>
             <input type="text" id="input_string" placeholder="">
             <input type="submit" id="submit_re" value="Validate">
         </form>
-        <br>
         <h4>Validation Result</h4>
         <div id="validation">
 
@@ -47,7 +48,6 @@
             
         </script>
     </div>
-    <div class="container">This is another div</div>
     
 </body>
 </html>

@@ -23,20 +23,30 @@ function validateInput(e) {
         alert('Please enter value!');
     } else if (getRadioValue == '') {
         alert('Please select one of your choice!');
-    }
+    }   
     else {
         let radio = getRadioValue();
         switch (radio) {
             case "email":
                 validateEmail(inputValue);
                 break;
+            case "cell":
+                validateCell(inputValue);
+                break;
+            case "postcode":
+                validatePostcode(inputValue);
+                break;
+            case "name":
+                validateName(inputValue);
+                break;
             default:
-                alert(`Please select one! value: ${radio}`);
+            alert(`Please select one! value: ${radio}`);
         }        
     }
     e.preventDefault();
 }
 
+//get the value of checked radio
 function getRadioValue() {
     let selectionValue = '';
     radioInput.forEach(radio => {
@@ -48,19 +58,54 @@ function getRadioValue() {
     return selectionValue;
 }
 
+//insert placeholder after selecting the radio button 
 function insertPlaceholder(param) {
+    input.value = '';
     input.placeholder = `Enter ${param.target.value}`;
-    //console.log(param);
+    
+    //if cell no. selected insert +88 before input field
+    if(param.target.value == 'cell') {
+        if(input.previousElementSibling.nodeName != 'SPAN'){
+            let beforeInput = document.querySelector('#lbl_name');
+            let span = document.createElement('span');
+            span.textContent = '+88';
+            form.insertBefore(span,input);
+        }        
+    } else {
+        if(input.previousElementSibling.nodeName == 'SPAN'){
+            input.previousElementSibling.remove();
+        }
+    }
 }
 
 function validateEmail(str) {
     /* allowed special character = '@' '.' '_' '-'
     after @ 1 or 2 '.' allowed */
     let re = /^([a-zA-Z0-9]\.?\_?\-?)+[^\.\_]@([a-zA-Z0-9])+\.+([a-zA-Z0-9])+\.?([a-zA-Z0-9]){2,}$/;
-    let check = re.test(str);
-    if(check){
-        validation.innerHTML = `<h5 class='success'>"${str}" matches with <br> RE: ${re.source}`;
+    showResult(str, re);
+}
+
+function validatePostcode(str) {
+    let re = /^[0-9]{4}$/;
+    showResult(str, re);
+}
+
+function validateCell(str) {
+    let re = /^01[0-9]{9}$/;
+    showResult(str, re);
+}
+
+
+function validateName(str) {
+    let re = /^(([A-Za-z])+(\.?\s?\'?\-?)){2,}$/;
+    showResult(str, re);
+}
+
+
+function showResult(str, re) {
+    if(re.test(str)){
+        validation.innerHTML = `<h5 class='success'>"${str}" matches with <br> RE: "${re.source}"`;
     } else {
-        validation.innerHTML = `<h5 class='error'>${str} does not matches <br> RE: ${re.source}`;
-    }
+        validation.innerHTML =  `<h5 class='error'>"${str}" does not matches <br> RE: "${re.source}"`;
+    }    
 }
